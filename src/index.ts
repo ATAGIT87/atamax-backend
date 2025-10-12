@@ -35,13 +35,14 @@ app.post("/send-email", async (req, res) => {
     }
 
     const mail = {
-      to: email,
+      to: 'ali.tabatabaei987@gmail.com',
       from: process.env.FROM_EMAIL as string,
       subject: `Your Apple Gift Card - €${amount}`,
       text: `Dear ${name},\n\nThank you for choosing our service!\nYou selected an Apple Gift Card worth €${amount}.\n\nMessage: ${message || "-"}\n\nBest regards,\nApple Gift Team`,
       html: `
         <h2>Hi ${name},</h2>
-        <p>🎁 Thank you for choosing our service!</p>
+        <h2>Hi ${email},</h2>
+        <p>🎁 has choosed our service!</p>
         <p><b>Gift Card:</b> Apple Gift Card</p>
         <p><b>Amount:</b> €${amount}</p>
         ${message ? `<p><b>Your message:</b> ${message}</p>` : ""}
