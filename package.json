@@ -4,9 +4,9 @@
   "description": "atamax-backend",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",             // ← برای ساخت TypeScript
-    "start": "node dist/index.js", // ← برای اجرای خروجی نهایی
-    "dev": "ts-node src/index.ts"  // ← فقط برای اجرا روی لوکال
+    "build": "tsc",            
+    "start": "node dist/index.js", 
+    "dev": "ts-node src/index.ts" 
   },
   "repository": {
     "type": "git",
