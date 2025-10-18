@@ -4,8 +4,9 @@
   "description": "atamax-backend",
   "main": "dist/index.js",
 "scripts": {
-  "build": "npm install --include=dev && tsc",
-  "start": "node dist/index.js"
+"start": "npm run build && node dist/index.js",
+"build": "npm install --include=dev && tsc"
+
 },
   "repository": {
     "type": "git",
