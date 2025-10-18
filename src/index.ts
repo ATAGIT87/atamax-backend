@@ -6,47 +6,34 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-app.use(cors())
+app.use(cors());
+app.use(express.json());
+app.use(express.static("public"));
 
-
+// ✅ تبدیل رشته PORT به عدد
 const PORT = Number(process.env.PORT) || 8080;
 
-// Validate env variables
+// ✅ تنظیم SendGrid
 if (!process.env.SENDGRID_API_KEY || !process.env.FROM_EMAIL) {
   console.error("❌ Missing SENDGRID_API_KEY or FROM_EMAIL in .env file");
   process.exit(1);
 }
-
-// Configure SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Parse JSON body
-app.use(express.json());
-
-// Serve static files (HTML, CSS, JS)
-app.use(express.static("public"));
-
-// Main route for sending email
+// ✅ مسیر ارسال ایمیل
 app.post("/send-email", async (req, res) => {
   try {
     const { name, email, amount, message } = req.body;
-
-    // Validation
-    if (!name || !email || !amount) {
+    if (!name || !email || !amount)
       return res.status(400).json({ error: "Missing required fields" });
-    }
 
     const mail = {
-      to: 'ali.tabatabaei987@gmail.com',
+      to: "ali.tabatabaei987@gmail.com",
       from: process.env.FROM_EMAIL as string,
       subject: `Your Apple Gift Card - €${amount}`,
-      text: `Dear ${name},\n\nThank you for choosing our service!\nYou selected an Apple Gift Card worth €${amount}.\n\nMessage: ${message || "-"}\n\nBest regards,\nApple Gift Team`,
       html: `
         <h2>Hi ${name},</h2>
-        <h2>Hi ${email},</h2>
-        <p>🎁 has choosed our service!</p>
-        <p><b>Gift Card:</b> Apple Gift Card</p>
-        <p><b>Amount:</b> €${amount}</p>
+        <p>🎁 You selected an Apple Gift Card worth €${amount}</p>
         ${message ? `<p><b>Your message:</b> ${message}</p>` : ""}
         <p>Best regards,<br>Apple Gift Team</p>
       `,
@@ -61,7 +48,7 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
-// Start server
+// ✅ باید حتماً روی 0.0.0.0 گوش بده تا Cloud Run بتونه دسترسی پیدا کنه
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running and listening on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
