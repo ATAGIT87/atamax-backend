@@ -13,11 +13,10 @@ app.use(express.static("public"));
 // ✅ تبدیل رشته PORT به عدد
 const PORT = Number(process.env.PORT) || 8080;
 
-// ✅ تنظیم SendGrid
 if (!process.env.SENDGRID_API_KEY || !process.env.FROM_EMAIL) {
-  console.error("❌ Missing SENDGRID_API_KEY or FROM_EMAIL in .env file");
-  process.exit(1);
+  console.warn("⚠️ Warning: Missing SENDGRID_API_KEY or FROM_EMAIL");
 }
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // ✅ مسیر ارسال ایمیل
