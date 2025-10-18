@@ -9,7 +9,7 @@ const app = express();
 app.use(cors())
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = Number(process.env.PORT) || 8080;
 
 // Validate env variables
 if (!process.env.SENDGRID_API_KEY || !process.env.FROM_EMAIL) {
@@ -62,6 +62,6 @@ app.post("/send-email", async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running and listening on port ${PORT}`);
 });
