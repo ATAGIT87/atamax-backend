@@ -17,7 +17,7 @@ if (!process.env.SENDGRID_API_KEY || !process.env.FROM_EMAIL) {
   console.warn("⚠️ Warning: Missing SENDGRID_API_KEY or FROM_EMAIL");
 }
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 // ✅ مسیر ارسال ایمیل
 app.post("/send-email", async (req, res) => {
